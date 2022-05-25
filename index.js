@@ -16,7 +16,7 @@ client.on('message', message=>{
       const user = message.mentions.users.first();
     message.channel.send(user.username) 
     }else{
-      message.channel.send("Hello World");
+      message.channel.send(`Please provide a valid arguments: ${message.author}`);
     }   
        
   }
@@ -25,10 +25,7 @@ client.on('message', message=>{
     if(message.channel.name == "debug-channel"){
       message.channel.delete();
     }
-  }
-  
-  
-  
+  } 
 });
 
 const mySecret = process.env['BOT_TOKEN']
