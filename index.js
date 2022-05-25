@@ -1,4 +1,3 @@
-console.log("Debug");
 const { Client, Intents } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -7,25 +6,29 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 //  console.log("Ready");
 //});
 
+//Command: M!
 client.on('message', message=>{
-  console.log(message.content);
-  if(message.content == "!ping"){
-    message.channel.send("Hello World");
+  //process user input
+  const user_input = message.content.trim().split(" ");
+  const command = user_input.shift().toLowerCase();
+  if(command == "m!ping"){
+    if(user_input.length != 0){
+      const user = message.mentions.users.first();
+    message.channel.send(user.username) 
+    }else{
+      message.channel.send("Hello World");
+    }   
+       
   }
-  else if(message.content == "!delete"){
-    message.delete(message.content);
-  }
-  else if(message.content == "!clear"){
+  //for developer
+  if(command == "m!delete"){
     if(message.channel.name == "debug-channel"){
       message.channel.delete();
-    }else{
-      message.channel.send("This is not a debug-channel").then(msg=>{
-        setTimeout(()=>{
-          msg.delete("This is not a debug-channel",50000);
-        })
-      })
     }
   }
+  
+  
+  
 });
 
 const mySecret = process.env['BOT_TOKEN']
